@@ -1,0 +1,21 @@
+{
+"update_url": "https://clients2.google.com/service/update2/crx",
+
+	"manifest_version": 2,
+	"name": "Bitcoin Sneak Peek",
+	"version": "0.1",
+	"description": "Instantly see the balance of a Bitcoin address mentioned on any web page.",
+	"permissions": ["https://blockchain.info/","http://blockexplorer.com/"],
+	"web_accessible_resources": [
+		"i/bitcoinpeek_logo32.png"
+	],
+	"content_scripts": 
+	[
+		{
+			"matches": ["*://*/*"],
+			"js": ["content_script.js"],
+			"run_at": "document_end"
+		}
+	]
+}
+
