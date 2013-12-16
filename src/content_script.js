@@ -185,7 +185,7 @@ function addHolderContent() {
   for (var i = 0, len = list.length; i < len; i++) {
 
     var img = document.createElement("img");
-	img.src = chrome.extension.getURL("i/bitcoinpeek_logo32.png");
+	img.src = chrome.extension.getURL("i/bitcoinsneakpeak32.png");
 	img.className = 'bitcoinBalanceIcon';
 	img.setAttribute('title','Bitcoin Sneak Peek');
 	img.setAttribute('alt','Bitcoin Sneak Peek');

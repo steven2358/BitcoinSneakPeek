@@ -3,12 +3,16 @@
 
 	"manifest_version": 2,
 	"name": "Bitcoin Sneak Peek",
-	"version": "0.1",
+	"version": "0.2",
 	"description": "Instantly see the balance of a Bitcoin address mentioned on any web page.",
 	"permissions": ["https://blockchain.info/","http://blockexplorer.com/"],
 	"web_accessible_resources": [
-		"i/bitcoinpeek_logo32.png"
+		"i/bitcoinsneakpeak32.png"
 	],
+	"icons": {
+		"128": "i/logo128x128.png",
+		"48": "i/logo48x48.png"		
+	},
 	"content_scripts": 
 	[
 		{
