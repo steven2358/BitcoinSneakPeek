@@ -125,12 +125,12 @@ function loadBlockExplorerData(node,publicKey) {
 				var myBalance = xhr.response;
 				loadBlockExplorerReceived(node,publicKey,myBalance);
 			} else {
-				node.innerHTML = '<a href="http://blockexplorer.com/address/'+ publicKey +'" target="_blank">BlockExplorer</a> not available.';
+				node.innerHTML = '<a href="https://blockexplorer.com/address/'+ publicKey +'" target="_blank">BlockExplorer</a> not available.';
 				console.log('BlockExplorer not available. Error '+status+'.');
 			}
 		}
 	}
-	var url = 'http://blockexplorer.com/q/addressbalance/'+publicKey;
+	var url = 'https://blockexplorer.com/q/addressbalance/'+publicKey;
 	
 	xhr.open("GET", url, true);
 	xhr.send();
@@ -146,14 +146,14 @@ function loadBlockExplorerReceived(node,publicKey,myBalance) {
 			var status = xhr.status;
 			if (status == 200) {
 				var myReceived = xhr.response;
-				node.innerHTML = 'Balance: '+ myBalance + ' BTC. Received: '+ myReceived + ' BTC. <a href="http://blockexplorer.com/address/'+ publicKey +'" target="_blank">BlockExplorer</a>';
+				node.innerHTML = 'Balance: '+ myBalance + ' BTC. Received: '+ myReceived + ' BTC. <a href="https://blockexplorer.com/address/'+ publicKey +'" target="_blank">BlockExplorer</a>';
 			} else {
-				node.innerHTML = '<a href="http://blockexplorer.com/address/'+ publicKey +'" target="_blank">BlockExplorer</a> not available.';
+				node.innerHTML = '<a href="https://blockexplorer.com/address/'+ publicKey +'" target="_blank">BlockExplorer</a> not available.';
 				console.log('BlockExplorer not available. Error '+status+'.');
 			}
 		}
 	}
-	var url = 'http://blockexplorer.com/q/getreceivedbyaddress/'+publicKey;
+	var url = 'https://blockexplorer.com/q/getreceivedbyaddress/'+publicKey;
 	
 	xhr.open("GET", url, true);
 	xhr.send();
@@ -189,7 +189,7 @@ function addHolderContent() {
 	img.className = 'bitcoinBalanceIcon';
 	img.setAttribute('title','Bitcoin Sneak Peek');
 	img.setAttribute('alt','Bitcoin Sneak Peek');
-	img.style.cssText = 'height:1em;vertical-align:-10%;cursor:pointer;margin:0 0 0 .5em;';
+	img.style.cssText = 'height:1em;vertical-align:-10%;cursor:pointer;margin-left:.5em;display:inline;';
 	list[i].appendChild(img);
 	
     var span = document.createElement("span");

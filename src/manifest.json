@@ -5,7 +5,7 @@
 	"name": "Bitcoin Sneak Peek",
 	"version": "0.2",
 	"description": "Instantly see the balance of a Bitcoin address mentioned on any web page.",
-	"permissions": ["https://blockchain.info/","http://blockexplorer.com/"],
+	"permissions": ["https://blockchain.info/","https://blockexplorer.com/"],
 	"web_accessible_resources": [
 		"i/bitcoinsneakpeak32.png"
 	],
