@@ -1,3 +1,12 @@
+// Bitcoin Sneak Peek: Instantly see the balance of a 
+// Bitcoin address mentioned on any web page.
+//
+// Copyright (c) 2014 Steven Van Vaerenbergh
+//
+// URL: https://github.com/steven2358/BitcoinSneakPeek
+//
+// Licensed under the MIT license:
+//	http://www.opensource.org/licenses/mit-license.php
 
 /**
  * Walk through the DOM tree and process all text nodes.

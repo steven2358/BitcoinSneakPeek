@@ -11,3 +11,8 @@ How to use
 3. You'll see a small info icon next to the Bitcoin address. Click it.
 
 Try it on our address: 1KLoepWkHVEMksdMCsu7nc5amfTvVb2qvk
+
+License
+-------
+
+This source code is released under the MIT License.
