@@ -66,7 +66,11 @@ function insertSpanInTextNode(textNode,spanKey,spanClass,at) {
   var span = document.createElement("span");
   span.setAttribute('key',spanKey);
   span.className = spanClass;
-  span.appendChild(document.createTextNode(''));
+  var textHolderDiv = document.createElement("div");
+  var textNodeParent = textNode.parentNode;
+  textHolderDiv.setAttribute('style', 'display:none;border:solid 1px #BEBEBE;background:#FAFAFA;position:absolute;-moz-border-radius:5px;border-radius:5px;');
+  textHolderDiv.appendChild(document.createTextNode(''));
+  span.appendChild( textHolderDiv );
 
   // split the text node into two and add new span
   textNode.parentNode.insertBefore(span, textNode.splitText(at));
@@ -84,7 +88,10 @@ function insertSpanAfterLink(textNode,spanKey,spanClass) {
       span.setAttribute('key',spanKey);
 	  span.className = spanClass;
       span.appendChild(document.createTextNode(''));
-	  
+	  var textHolderDiv = document.createElement("div");
+	  textHolderDiv.setAttribute('style', 'display:none;border:solid 1px #BEBEBE;background:#FAFAFA;position:absolute;-moz-border-radius:5px;border-radius:5px;');
+	  textHolderDiv.appendChild(document.createTextNode(''));
+	  span.appendChild(textHolderDiv);
 	  // add the span after the link
 	  curNode.parentNode.insertBefore(span,curNode.nextSibling);
 	  return true;
@@ -112,6 +119,7 @@ function loadData(node,publicKey) {
 				console.log('Blockchain info not available. Error '+status+'.');
 				loadBlockExplorerData(node,publicKey);
 			}
+			node.style.top = (node.parentNode.offsetTop-node.offsetHeight)+'px';
 		}
 	}
 	var url = 'https://blockchain.info/rawaddr/'+publicKey+'?limit=0'
@@ -137,6 +145,7 @@ function loadBlockExplorerData(node,publicKey) {
 				node.innerHTML = '<a href="https://blockexplorer.com/address/'+ publicKey +'" target="_blank">BlockExplorer</a> not available.';
 				console.log('BlockExplorer not available. Error '+status+'.');
 			}
+			node.style.top = (node.parentNode.offsetTop-node.offsetHeight)+'px';
 		}
 	}
 	var url = 'https://blockexplorer.com/q/addressbalance/'+publicKey;
@@ -160,6 +169,7 @@ function loadBlockExplorerReceived(node,publicKey,myBalance) {
 				node.innerHTML = '<a href="https://blockexplorer.com/address/'+ publicKey +'" target="_blank">BlockExplorer</a> not available.';
 				console.log('BlockExplorer not available. Error '+status+'.');
 			}
+			node.style.top = (node.parentNode.offsetTop-node.offsetHeight)+'px';
 		}
 	}
 	var url = 'https://blockexplorer.com/q/getreceivedbyaddress/'+publicKey;
@@ -172,16 +182,21 @@ function loadBlockExplorerReceived(node,publicKey,myBalance) {
  * Action to perform when clicking on icon.
  **/
 function bbToggle(){
-  if (this.nextSibling.innerHTML == ''){
-    this.nextSibling.style.display = 'inline';
+  if (this.previousElementSibling.innerHTML == ''){
+    var prevElem = this.previousElementSibling;
+	prevElem.style.display = 'inline';
+	console.log( this.offsetHeight );
+	prevElem.style.top = (this.offsetTop-prevElem.offsetHeight)+'px';
+	prevElem.style.left= (this.offsetLeft)+'px';
     var publicKey = this.parentNode.getAttribute('key');
-    loadData(this.nextSibling,publicKey);
+    loadData(this.previousElementSibling,publicKey);
+	prevElem.style.top = (this.offsetTop-prevElem.offsetHeight)+'px';
   }
   else {
-    if (this.nextSibling.style.display == 'none') {
-      this.nextSibling.style.display = 'inline';
+    if (this.previousElementSibling.style.display == 'none') {
+      this.previousElementSibling.style.display = 'inline';
     } else {
-      this.nextSibling.style.display = 'none';
+      this.previousElementSibling.style.display = 'none';
     }
   }
 }
