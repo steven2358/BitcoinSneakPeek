@@ -3,6 +3,8 @@ Bitcoin Sneak Peek
 
 Google Chrome extension that allows you to quickly see the balance of Bitcoin addresses mentioned on web pages.
 
+Chrome Store link: [https://chrome.google.com/webstore/detail/bitcoin-sneak-peek/nmoioahfkdpfpjngcljhcphglbdppdmj](https://chrome.google.com/webstore/detail/bitcoin-sneak-peek/nmoioahfkdpfpjngcljhcphglbdppdmj)
+
 How to use
 ----------
 
