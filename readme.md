@@ -11,7 +11,8 @@ How to use
 3. You'll see a small info icon next to the Bitcoin and Dogcoin address. Click it.
 
 Try it on our address: 1KLoepWkHVEMksdMCsu7nc5amfTvVb2qvk
-Or: D8WgCBVQrzEhT8r5MEhEqqBEV5iYw3fCQQ
+
+Dogecoin address: D8WgCBVQrzEhT8r5MEhEqqBEV5iYw3fCQQ
 
 License
 -------

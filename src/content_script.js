@@ -299,7 +299,7 @@ function processTextNode(textNode)
 	
 	var re = /\b[13][1-9A-HJ-NP-Za-km-z]{26,33}\b/g
 	//From http://www.reddit.com/r/dogecoindev/comments/1y60ov/regular_expression_to_check_if_wallet_adress_is/
-	var doge_re = /\b[D]{1}[1-9A-HJ-NP-Za-km-z]{33}\b/g;
+	var doge_re = /\b[D]{1}[5-9A-HJ-NP-U]{1}[1-9A-HJ-NP-Za-km-z]{32}\b/g;
 	var val = textNode.nodeValue;
 	
 	if (re.test(val)) { // exclude case 1
@@ -334,7 +334,7 @@ function processTextNode(textNode)
 		insertSpanAfterLink(textNode,publicKey,'dcHolder');	
 	  }
 	  else { // case 2
-		var myRe = /\b[D]{1}[1-9A-HJ-NP-Za-km-z]{33}\b/g;
+		var myRe = /\b[D]{1}[5-9A-HJ-NP-U]{1}[1-9A-HJ-NP-Za-km-z]{32}\b/g;
 		
 		// From https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp/exec
 		var myArray;
