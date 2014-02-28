@@ -68,7 +68,7 @@ function insertSpanInTextNode(textNode,spanKey,spanClass,at) {
   span.className = spanClass;
   var textHolderDiv = document.createElement("div");
   var textNodeParent = textNode.parentNode;
-  textHolderDiv.setAttribute('style', 'color:black;z-index:9999;display:none;border:solid 1px #BEBEBE;background:#FAFAFA;position:absolute;-moz-border-radius:5px;border-radius:5px;');
+  textHolderDiv.setAttribute('style', 'width:auto;white-space: nowrap;display:inline;color:black;z-index:9999;margin-top:-1.2em;margin-left:-99999em;border:solid 1px #BEBEBE;background:#FAFAFA;position:absolute;-moz-border-radius:5px;border-radius:5px;');
   textHolderDiv.appendChild(document.createTextNode(''));
   span.appendChild( textHolderDiv );
 
@@ -89,7 +89,7 @@ function insertSpanAfterLink(textNode,spanKey,spanClass) {
 	  span.className = spanClass;
       span.appendChild(document.createTextNode(''));
 	  var textHolderDiv = document.createElement("div");
-	  textHolderDiv.setAttribute('style', 'color:black;z-index:9999;display:none;border:solid 1px #BEBEBE;background:#FAFAFA;position:absolute;-moz-border-radius:5px;border-radius:5px;');
+	  textHolderDiv.setAttribute('style', 'width:auto;white-space: nowrap;color:black;z-index:9999;display:inline;margin-top:-1.2em;margin-left:-99999em;border:solid 1px #BEBEBE;background:#FAFAFA;position:absolute;-moz-border-radius:5px;border-radius:5px;');
 	  textHolderDiv.appendChild(document.createTextNode(''));
 	  span.appendChild(textHolderDiv);
 	  // add the span after the link
@@ -119,7 +119,6 @@ function loadData(node,publicKey) {
 				console.log('Blockchain info not available. Error '+status+'.');
 				loadBlockExplorerData(node,publicKey);
 			}
-			node.style.top = (node.offsetTop-(node.offsetHeight-initHeight))+'px';
 		}
 	}
 	var url = 'https://blockchain.info/rawaddr/'+publicKey+'?limit=0'
@@ -145,11 +144,9 @@ function loadBlockExplorerData(node,publicKey) {
 				node.innerHTML = '<a href="https://blockexplorer.com/address/'+ publicKey +'" target="_blank">BlockExplorer</a> not available.';
 				console.log('BlockExplorer not available. Error '+status+'.');
 			}
-			node.style.top = (node.parentNode.offsetTop-node.offsetHeight)+'px';
 		}
 	}
 	var url = 'https://blockexplorer.com/q/addressbalance/'+publicKey;
-	var initHeight = node.offsetHeight;
 	xhr.open("GET", url, true);
 	xhr.send();
 }
@@ -159,7 +156,6 @@ function loadBlockExplorerData(node,publicKey) {
  **/
 function loadBlockExplorerReceived(node,publicKey,myBalance) {
 	var xhr = new XMLHttpRequest();
-	var initHeight = node.offsetHeight;
 	xhr.onreadystatechange = function() {
 		if (xhr.readyState == 4) {
 			var status = xhr.status;
@@ -170,7 +166,6 @@ function loadBlockExplorerReceived(node,publicKey,myBalance) {
 				node.innerHTML = '<a href="https://blockexplorer.com/address/'+ publicKey +'" target="_blank">BlockExplorer</a> not available.';
 				console.log('BlockExplorer not available. Error '+status+'.');
 			}
-			node.style.top = (node.parentNode.offsetTop-node.offsetHeight)+'px';
 		}
 	}
 	var url = 'https://blockexplorer.com/q/getreceivedbyaddress/'+publicKey;
@@ -185,29 +180,19 @@ function loadBlockExplorerReceived(node,publicKey,myBalance) {
 function bbToggle(){
   if (this.previousElementSibling.innerHTML == ''){
     var prevElem = this.previousElementSibling;
-	prevElem.style.display = 'inline';
 	var elem = this;
-	var offLeft = elem.offsetLeft;
-	var offTop = elem.offsetTop;
 	
 	
-	while (elem = elem.offsetParent) {
-		offLeft += elem.offsetLeft;
-		offTop += elem.offsetTop;
-	}
+	prevElem.style.marginLeft = "1em";
 	
-	
-	prevElem.style.top = (offTop-prevElem.offsetHeight)+'px';
-	prevElem.style.left= (offLeft)+'px';
     var publicKey = this.parentNode.getAttribute('key');
     loadData(prevElem,publicKey);
-	prevElem.style.top = (offTop-prevElem.offsetHeight)+'px';
   }
   else {
-    if (this.previousElementSibling.style.display == 'none') {
-      this.previousElementSibling.style.display = 'inline';
+    if (this.previousElementSibling.style.marginLeft == '-99999em') {
+      this.previousElementSibling.style.marginLeft = '1em';
     } else {
-      this.previousElementSibling.style.display = 'none';
+      this.previousElementSibling.style.marginLeft = '-99999em';
     }
   }
 }
