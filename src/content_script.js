@@ -56,7 +56,6 @@ function addEventListenerByClass(className, event, fn) {
         list[i].addEventListener(event, fn, false);
     }
 }
-
 /**
  * Insert a span inside a text node.
  * From http://stackoverflow.com/a/374187
@@ -66,7 +65,11 @@ function insertSpanInTextNode(textNode,spanKey,spanClass,at) {
   var span = document.createElement("span");
   span.setAttribute('key',spanKey);
   span.className = spanClass;
-  span.appendChild(document.createTextNode(''));
+  var textHolderDiv = document.createElement("div");
+  var textNodeParent = textNode.parentNode;
+  textHolderDiv.setAttribute('style', 'width:auto;white-space: nowrap;display:none;color:black;z-index:9999;margin-left:1em;margin-top:-1.2em;border:solid 1px #BEBEBE;background:#FAFAFA;position:absolute;-moz-border-radius:5px;border-radius:5px;');
+  textHolderDiv.appendChild(document.createTextNode(''));
+  span.appendChild( textHolderDiv );
 
   // split the text node into two and add new span
   textNode.parentNode.insertBefore(span, textNode.splitText(at));
@@ -81,10 +84,13 @@ function insertSpanAfterLink(textNode,spanKey,spanClass) {
     if (curNode.tagName == 'A') {
       // create new span node
       var span = document.createElement("span");
-      span.setAttribute('key', spanKey);
+      span.setAttribute('key',spanKey);
 	  span.className = spanClass;
       span.appendChild(document.createTextNode(''));
-	  
+	  var textHolderDiv = document.createElement("div");
+	  textHolderDiv.setAttribute('style', 'width:auto;white-space: nowrap;color:black;z-index:9999;display:none;margin-left:1em;margin-top:-1.2em;border:solid 1px #BEBEBE;background:#FAFAFA;position:absolute;-moz-border-radius:5px;border-radius:5px;');
+	  textHolderDiv.appendChild(document.createTextNode(''));
+	  span.appendChild(textHolderDiv);
 	  // add the span after the link
 	  curNode.parentNode.insertBefore(span,curNode.nextSibling);
 	  return true;
@@ -218,31 +224,33 @@ function loadDogechainReceived(node,publicKey,myBalance) {
  * Action to perform when clicking on icon.
  **/
 function bbToggle(){
-  if (this.nextSibling.innerHTML == ''){
-    this.nextSibling.style.display = 'inline';
+  var prevElem = this.previousElementSibling;
+  if (prevElem.innerHTML == ''){
+    prevElem.style.display = 'inline';
     var publicKey = this.parentNode.getAttribute('key');
-    loadData(this.nextSibling,publicKey);
+    loadData(prevElem,publicKey);
   }
   else {
-    if (this.nextSibling.style.display == 'none') {
-      this.nextSibling.style.display = 'inline';
+    if (prevElem.style.display == 'none') {
+      prevElem.style.display = 'inline';
     } else {
-      this.nextSibling.style.display = 'none';
+      prevElem.style.display = 'none';
     }
   }
 }
 
 function dcToggle(){
-  if (this.nextSibling.innerHTML == ''){
-    this.nextSibling.style.display = 'inline';
+  var prevElem = this.previousElementSibling;
+  if (prevElem.innerHTML == ''){
+    prevElem.style.display = 'inline';
     var publicKey = this.parentNode.getAttribute('key');
-    loadDogeChainData(this.nextSibling,publicKey);
+    loadDogeChainData(prevElem,publicKey);
   }
   else {
-    if (this.nextSibling.style.display == 'none') {
-      this.nextSibling.style.display = 'inline';
+    if (prevElem.style.display == 'none') {
+      prevElem.style.display = 'inline';
     } else {
-      this.nextSibling.style.display = 'none';
+      prevElem.style.display = 'none';
     }
   }
 }
