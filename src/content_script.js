@@ -68,7 +68,7 @@ function insertSpanInTextNode(textNode,spanKey,spanClass,at) {
   span.className = spanClass;
   var textHolderDiv = document.createElement("div");
   var textNodeParent = textNode.parentNode;
-  textHolderDiv.setAttribute('style', 'width:auto;white-space: nowrap;display:inline;color:black;z-index:9999;margin-top:-1.2em;margin-left:-99999em;border:solid 1px #BEBEBE;background:#FAFAFA;position:absolute;-moz-border-radius:5px;border-radius:5px;');
+  textHolderDiv.setAttribute('style', 'width:auto;white-space: nowrap;display:none;color:black;z-index:9999;margin-left:1em;margin-top:-1.2em;border:solid 1px #BEBEBE;background:#FAFAFA;position:absolute;-moz-border-radius:5px;border-radius:5px;');
   textHolderDiv.appendChild(document.createTextNode(''));
   span.appendChild( textHolderDiv );
 
@@ -89,7 +89,7 @@ function insertSpanAfterLink(textNode,spanKey,spanClass) {
 	  span.className = spanClass;
       span.appendChild(document.createTextNode(''));
 	  var textHolderDiv = document.createElement("div");
-	  textHolderDiv.setAttribute('style', 'width:auto;white-space: nowrap;color:black;z-index:9999;display:inline;margin-top:-1.2em;margin-left:-99999em;border:solid 1px #BEBEBE;background:#FAFAFA;position:absolute;-moz-border-radius:5px;border-radius:5px;');
+	  textHolderDiv.setAttribute('style', 'width:auto;white-space: nowrap;color:black;z-index:9999;display:none;margin-left:1em;margin-top:-1.2em;border:solid 1px #BEBEBE;background:#FAFAFA;position:absolute;-moz-border-radius:5px;border-radius:5px;');
 	  textHolderDiv.appendChild(document.createTextNode(''));
 	  span.appendChild(textHolderDiv);
 	  // add the span after the link
@@ -183,16 +183,16 @@ function bbToggle(){
 	var elem = this;
 	
 	
-	prevElem.style.marginLeft = "1em";
+	prevElem.style.display = "inline";
 	
     var publicKey = this.parentNode.getAttribute('key');
     loadData(prevElem,publicKey);
   }
   else {
-    if (this.previousElementSibling.style.marginLeft == '-99999em') {
-      this.previousElementSibling.style.marginLeft = '1em';
+    if (this.previousElementSibling.style.display == 'none') {
+      this.previousElementSibling.style.display = 'inline';
     } else {
-      this.previousElementSibling.style.marginLeft = '-99999em';
+      this.previousElementSibling.style.display = 'none';
     }
   }
 }
