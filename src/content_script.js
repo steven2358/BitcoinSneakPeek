@@ -26,7 +26,9 @@ function walk(node) {
       }
       break;
     case 3: // Text node
-      processTextNode(node);
+	  if(node.parentElement.tagName.toLowerCase() != "script") {
+	    processTextNode(node);
+	  }
       break;
   }
 }
