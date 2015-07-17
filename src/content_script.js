@@ -16,7 +16,6 @@
    **/
   function walk(node) {
     
-     debugger;
     var child, next;
     switch (node.nodeType) {
       case 1:  // Element
@@ -42,7 +41,6 @@
    * From http://stackoverflow.com/a/5540610
    **/
   function nodeInLink(textNode) {
-    // debugger;
     var curNode = textNode;
     while (curNode) {
       if (curNode.tagName == 'A')
@@ -58,7 +56,6 @@
    * From http://stackoverflow.com/a/12362466
    **/
   function addEventListenerByClass(className, event, fn) {
-    // debugger;
       var list = document.getElementsByClassName(className);
       for (var i = 0, len = list.length; i < len; i++) {
           list[i].addEventListener(event, fn, false);
@@ -70,7 +67,6 @@
    * From http://stackoverflow.com/a/374187
    **/
   function insertSpanInTextNode(textNode,spanKey,spanClass,at) {
-    // debugger;
     // create new span node
     var span = document.createElement("span");
     span.setAttribute('key',spanKey);
@@ -85,7 +81,6 @@
    * Insert a span inside after the parent node that represents a link.
    **/
   function insertSpanAfterLink(textNode,spanKey,spanClass) {
-    // debugger;
     var curNode = textNode;
     while (curNode) {
       if (curNode.tagName == 'A') {
@@ -200,7 +195,6 @@
    * Add an image and an empty span to bbHolder span.
    **/
   function addHolderContent(context) {
-    // debugger;
     var list = context.getElementsByClassName('bbHolder');
     for (var i = 0, len = list.length; i < len; i++) {
 
@@ -233,7 +227,6 @@
     var re = /\b[13][1-9A-HJ-NP-Za-km-z]{26,33}\b/g
     var val = textNode.nodeValue;
     
-    // debugger;
     if (re.test(val)) { // exclude case 1
       if (nodeInLink(textNode)) { // case 3
         var publicKeys = val.match(re);
@@ -265,17 +258,13 @@
    * From https://developer.mozilla.org/en-US/docs/Web/API/MutationObserver
    */
   function observeMutations(){
-    // debugger;
     target = document.body;
  
     // create an observer instance
     var observer = new MutationObserver(function(mutations) {
       mutations.forEach(function(mutation) {
-        console.log('mutation: ' + mutation);
         target = mutation.addedNodes[0];
-        debugger;
         main(target);
-        console.log("Main done");
       });    
     });
      
