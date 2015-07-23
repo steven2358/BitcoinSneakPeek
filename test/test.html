@@ -1,0 +1,26 @@
+<html>
+  <body>
+    <!-- Should show Bitcoin addresses in all of the following scenarios -->
+    <script>
+
+      document.write("<h4>JS immediate injection in h4. Orange juice fund: 1KLoepWkHVEMksdMCsu7nc5amfTvVb2qvk</h4>");
+      document.write("JS immediate injection in raw text. Orange juice fund: 1KLoepWkHVEMksdMCsu7nc5amfTvVb2qvk<br>");
+
+      var appendChildElement = document.createTextNode("Appended child via JS. Orange juice fund: 1KLoepWkHVEMksdMCsu7nc5amfTvVb2qvk");
+      document.body.appendChild(appendChildElement);
+      
+      setTimeout(function() {
+    
+        var deferredElement = document.createElement('h3');
+        var deferredText = document.createTextNode("Delay for .1 second then append via JS. Orange juice fund: 1KLoepWkHVEMksdMCsu7nc5amfTvVb2qvk");
+        deferredElement.appendChild(deferredText);
+        document.body.appendChild(deferredElement);
+
+      }, 100);
+
+    </script>
+
+    <h4>Basic HTML. Orange juice fund: 1KLoepWkHVEMksdMCsu7nc5amfTvVb2qvk</h4>
+
+  </body>
+</html>
