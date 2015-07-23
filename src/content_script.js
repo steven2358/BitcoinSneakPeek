@@ -108,7 +108,7 @@ function loadData(node,publicKey) {
 			if (status == 200) {
 				var myReceived = parseInt(xhr.response.total_received)/100000000;
 				var myBalance = parseInt(xhr.response.final_balance)/100000000;
-				node.innerHTML = ' Balance: '+ myBalance + ' BTC. Received: '+ myReceived + ' BTC. <a href="https://blockchain.info/address/'+ publicKey +'" target="_blank">Blockchain</a>';
+				node.innerHTML = 'Balance: '+ myBalance + ' BTC. Received: '+ myReceived + ' BTC. <a href="https://blockchain.info/address/'+ publicKey +'" target="_blank">Blockchain</a>';
 			} else {
 				node.innerHTML = '<a href="https://blockchain.info/address/'+ publicKey +'" target="_blank">Blockchain</a> info not available.';
 				console.log('Blockchain info not available. Error '+status+'.');
@@ -157,7 +157,7 @@ function loadBlockExplorerReceived(node,publicKey,myBalance) {
 			var status = xhr.status;
 			if (status == 200) {
 				var myReceived = xhr.response;
-				node.innerHTML = ' Balance: '+ myBalance + ' BTC. Received: '+ myReceived + ' BTC. <a href="https://blockexplorer.com/address/'+ publicKey +'" target="_blank">BlockExplorer</a>';
+				node.innerHTML = 'Balance: '+ myBalance + ' BTC. Received: '+ myReceived + ' BTC. <a href="https://blockexplorer.com/address/'+ publicKey +'" target="_blank">BlockExplorer</a>';
 			} else {
 				node.innerHTML = '<a href="https://blockexplorer.com/address/'+ publicKey +'" target="_blank">BlockExplorer</a> not available.';
 				console.log('BlockExplorer not available. Error '+status+'.');
@@ -199,12 +199,12 @@ function addHolderContent() {
 	img.src = chrome.extension.getURL("i/bitcoinsneakpeak32.png");
 	img.className = 'bitcoinBalanceIcon';
 	img.setAttribute('title','Bitcoin Sneak Peek');
-	img.setAttribute('alt',''); // avoid copying out extension text
+	img.setAttribute('alt','Bitcoin Sneak Peek');
 	img.style.cssText = 'height:1em;vertical-align:-10%;cursor:pointer;margin-left:.5em;display:inline;';
 	list[i].appendChild(img);
 	
     var span = document.createElement("span");
-	span.style.cssText = 'display:none';
+	span.style.cssText = 'margin:0 0 0 .3em;display:none';
     span.appendChild(document.createTextNode(''));
     list[i].appendChild(span);
   }
