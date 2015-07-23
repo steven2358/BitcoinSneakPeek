@@ -10,10 +10,10 @@
 //	http://www.opensource.org/licenses/mit-license.php
 
 (function() {
-  /**
+  /*
    * Walk through the DOM tree and process all text nodes.
    * From http://stackoverflow.com/a/5904945/1221212
-   **/
+  */
   function walk(node) {
     
     var child, next;
@@ -41,10 +41,10 @@
      }
   }
 
-  /**
+  /*
    * Check if DOM text node is a link.
    * From http://stackoverflow.com/a/5540610
-   **/
+  */
   function nodeInLink(textNode) {
     var curNode = textNode;
     while (curNode) {
@@ -56,10 +56,10 @@
     return false;
   }
 
-  /**
+  /*
    * Apply an addEventListener to each element of a node list.
    * From http://stackoverflow.com/a/12362466
-   **/
+  */
   function addEventListenerByClass(className, event, fn) {
       var list = document.getElementsByClassName(className);
       for (var i = 0, len = list.length; i < len; i++) {
@@ -67,10 +67,10 @@
       }
   }
 
-  /**
+  /*
    * Insert a span inside a text node.
    * From http://stackoverflow.com/a/374187
-   **/
+  */
   function insertSpanInTextNode(textNode,spanKey,spanClass,at) {
     // create new span node
     var span = document.createElement("span");
@@ -82,9 +82,9 @@
     textNode.parentNode.insertBefore(span, textNode.splitText(at));
   }
 
-  /**
+  /*
    * Insert a span inside after the parent node that represents a link.
-   **/
+  */
   function insertSpanAfterLink(textNode,spanKey,spanClass) {
     var curNode = textNode;
     while (curNode) {
@@ -105,9 +105,9 @@
     }
   }
 
-  /**
+  /*
    * Load data from blockchain.info and write to span.
-   **/
+  */
   function loadData(node,publicKey) {
     var xhr = new XMLHttpRequest();
     xhr.onreadystatechange = function() {
@@ -132,9 +132,9 @@
     xhr.send();
   }
 
-  /**
+  /*
    * Load data from blockexplorer.com.
-   **/
+  */
   function loadBlockExplorerData(node,publicKey) {
     var xhr = new XMLHttpRequest();
     xhr.onreadystatechange = function() {
@@ -155,9 +155,9 @@
     xhr.send();
   }
 
-  /**
+  /*
    * Load received amount from blockexplorer.com and write to span.
-   **/
+  */
   function loadBlockExplorerReceived(node,publicKey,myBalance) {
     var xhr = new XMLHttpRequest();
     xhr.onreadystatechange = function() {
@@ -178,9 +178,9 @@
     xhr.send();
   }
 
-  /**
+  /*
    * Action to perform when clicking on icon.
-   **/
+  */
   function bbToggle(){
     if (this.nextSibling.innerHTML == ''){
       this.nextSibling.style.display = 'inline';
@@ -196,9 +196,9 @@
     }
   }
 
-  /**
+  /*
    * Add an image and an empty span to bbHolder span.
-   **/
+  */
   function addHolderContent(context) {
     try {
       var list = context.getElementsByClassName('bbHolder');
@@ -225,16 +225,16 @@
     }
   }
 
-  /**
+  /*
    * Add code to DOM nodes.
-   **/
+  */
   function processTextNode(textNode) 
   {
-    /**
+    /*
     * Case 1: no address in text -> do nothing
     * Case 2: one or more addresses in text, not part of link -> place span after each address
     * Case 3: one address in text, part of link -> place span after link node
-    **/
+    */
     
     var re = /\b[13][1-9A-HJ-NP-Za-km-z]{26,33}\b/g
     var val = textNode.nodeValue;
