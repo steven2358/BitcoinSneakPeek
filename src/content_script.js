@@ -11,39 +11,39 @@
 
 (function() {
   /*
-   * Walk through the DOM tree and process all text nodes.
-   * From http://stackoverflow.com/a/5904945/1221212
+  * Walk through the DOM tree and process all text nodes.
+  * From http://stackoverflow.com/a/5904945/1221212
   */
   function walk(node) {
     
     var child, next;
     try {
       switch (node.nodeType) {
-        case 1:  // Element
-        case 9:  // Document
-        case 11: // Document fragment
-          child = node.firstChild;
-          while (child) {
-            next = child.nextSibling;
-            walk(child);
-            child = next;
-          }
-          break;
-        case 3: // Text node
+      case 1:  // Element
+      case 9:  // Document
+      case 11: // Document fragment
+        child = node.firstChild;
+        while (child) {
+          next = child.nextSibling;
+          walk(child);
+          child = next;
+        }
+        break;
+      case 3: // Text node
         if(node.parentElement.tagName.toLowerCase() != "script") {
           processTextNode(node);
         }
-          break;
+        break;
       }
     }
     catch (err) {
       console.log("Error BitcoinSneakPeek: " + err);
-     }
+    }
   }
 
   /*
-   * Check if DOM text node is a link.
-   * From http://stackoverflow.com/a/5540610
+  * Check if DOM text node is a link.
+  * From http://stackoverflow.com/a/5540610
   */
   function nodeInLink(textNode) {
     var curNode = textNode;
@@ -57,19 +57,19 @@
   }
 
   /*
-   * Apply an addEventListener to each element of a node list.
-   * From http://stackoverflow.com/a/12362466
+  * Apply an addEventListener to each element of a node list.
+  * From http://stackoverflow.com/a/12362466
   */
   function addEventListenerByClass(className, event, fn) {
-      var list = document.getElementsByClassName(className);
-      for (var i = 0, len = list.length; i < len; i++) {
-          list[i].addEventListener(event, fn, false);
-      }
+    var list = document.getElementsByClassName(className);
+    for (var i = 0, len = list.length; i < len; i++) {
+      list[i].addEventListener(event, fn, false);
+    }
   }
 
   /*
-   * Insert a span inside a text node.
-   * From http://stackoverflow.com/a/374187
+  * Insert a span inside a text node.
+  * From http://stackoverflow.com/a/374187
   */
   function insertSpanInTextNode(textNode,spanKey,spanClass,at) {
     // create new span node
@@ -83,7 +83,7 @@
   }
 
   /*
-   * Insert a span inside after the parent node that represents a link.
+  * Insert a span inside after the parent node that represents a link.
   */
   function insertSpanAfterLink(textNode,spanKey,spanClass) {
     var curNode = textNode;
@@ -92,21 +92,21 @@
         // create new span node
         var span = document.createElement("span");
         span.setAttribute('key',spanKey);
-      span.className = spanClass;
+        span.className = spanClass;
         span.appendChild(document.createTextNode(''));
-      
-      // add the span after the link
-      curNode.parentNode.insertBefore(span,curNode.nextSibling);
-      return true;
-    }
+        
+        // add the span after the link
+        curNode.parentNode.insertBefore(span,curNode.nextSibling);
+        return true;
+      }
       else {
-      curNode = curNode.parentNode;
-    }
+        curNode = curNode.parentNode;
+      }
     }
   }
 
   /*
-   * Load data from blockchain.info and write to span.
+  * Load data from blockchain.info and write to span.
   */
   function loadData(node,publicKey) {
     var xhr = new XMLHttpRequest();
@@ -133,7 +133,7 @@
   }
 
   /*
-   * Load data from blockexplorer.com.
+  * Load data from blockexplorer.com.
   */
   function loadBlockExplorerData(node,publicKey) {
     var xhr = new XMLHttpRequest();
@@ -156,7 +156,7 @@
   }
 
   /*
-   * Load received amount from blockexplorer.com and write to span.
+  * Load received amount from blockexplorer.com and write to span.
   */
   function loadBlockExplorerReceived(node,publicKey,myBalance) {
     var xhr = new XMLHttpRequest();
@@ -179,7 +179,7 @@
   }
 
   /*
-   * Action to perform when clicking on icon.
+  * Action to perform when clicking on icon.
   */
   function bbToggle(){
     if (this.nextSibling.innerHTML == ''){
@@ -197,7 +197,7 @@
   }
 
   /*
-   * Add an image and an empty span to bbHolder span.
+  * Add an image and an empty span to bbHolder span.
   */
   function addHolderContent(context) {
     try {
@@ -211,7 +211,7 @@
         img.setAttribute('alt',''); // avoid copying out extension text
         img.style.cssText = 'height:1em;vertical-align:-10%;cursor:pointer;margin-left:.5em;display:inline;';
         list[i].appendChild(img);
-      
+        
         var span = document.createElement("span");
         span.style.cssText = 'display:none';
         span.appendChild(document.createTextNode(''));
@@ -226,7 +226,7 @@
   }
 
   /*
-   * Add code to DOM nodes.
+  * Add code to DOM nodes.
   */
   function processTextNode(textNode) 
   {
@@ -242,36 +242,36 @@
     if (re.test(val)) { // exclude case 1
       if (nodeInLink(textNode)) { // case 3
         var publicKeys = val.match(re);
-      var publicKey = publicKeys[0];
-      
-      insertSpanAfterLink(textNode,publicKey,'bbHolder');	
+        var publicKey = publicKeys[0];
+        
+        insertSpanAfterLink(textNode,publicKey,'bbHolder');	
       }
       else { // case 2
-      var myRe = /\b[13][1-9A-HJ-NP-Za-km-z]{26,33}\b/g;
-      
-      // From https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp/exec
-      var myArray;
-      var prev = 0;
-      var counter = 0;
-      var curNode = textNode;
-      while ((myArray = myRe.exec(val)) !== null)
-      {
-        insertSpanInTextNode(curNode,myArray[0],'bbHolder',myRe.lastIndex-prev);		  
-        prev = myRe.lastIndex;
-        counter = counter + 1;
-        curNode = textNode.parentNode.childNodes[2*counter];
-      }
+        var myRe = /\b[13][1-9A-HJ-NP-Za-km-z]{26,33}\b/g;
+        
+        // From https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp/exec
+        var myArray;
+        var prev = 0;
+        var counter = 0;
+        var curNode = textNode;
+        while ((myArray = myRe.exec(val)) !== null)
+        {
+          insertSpanInTextNode(curNode,myArray[0],'bbHolder',myRe.lastIndex-prev);		  
+          prev = myRe.lastIndex;
+          counter = counter + 1;
+          curNode = textNode.parentNode.childNodes[2*counter];
+        }
       }
     }
   }
 
   /*
-   * Observe mutations for deferred elements and sneak peak them
-   * From https://developer.mozilla.org/en-US/docs/Web/API/MutationObserver
-   */
+  * Observe mutations for deferred elements and sneak peak them
+  * From https://developer.mozilla.org/en-US/docs/Web/API/MutationObserver
+  */
   function observeMutations(){
     target = document.body;
- 
+
     // create an observer instance
     var observer = new MutationObserver(function(mutations) {
       mutations.forEach(function(mutation) {
@@ -279,18 +279,18 @@
         main(target);
       });    
     });
-     
+    
     // configuration of the observer:
     var config = { attributes: true, childList: true, characterData: true };
-     
+    
     // pass in the target node, as well as the observer options
     observer.observe(target, config);  
 
   }
 
   /*
-   *
-   */
+  *
+  */
   function main(target){
     walk(target);
     addHolderContent(target);
