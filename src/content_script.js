@@ -118,7 +118,7 @@
           var myBalance = parseInt(xhr.response.final_balance)/100000000;
           node.innerHTML = ' Balance: '+ myBalance + ' BTC. Received: '+ myReceived + ' BTC. <a href="https://blockchain.info/address/'+ publicKey +'" target="_blank">Blockchain</a>';
         } else {
-          node.innerHTML = '<a href="https://blockchain.info/address/'+ publicKey +'" target="_blank">Blockchain</a> info not available.';
+          node.innerHTML = ' <a href="https://blockchain.info/address/'+ publicKey +'" target="_blank">Blockchain</a> info not available.';
           console.log('Blockchain info not available. Error '+status+'.');
           loadBlockExplorerData(node,publicKey);
         }
@@ -141,10 +141,10 @@
       if (xhr.readyState == 4) {
         var status = xhr.status;
         if (status == 200) {
-          var myBalance = xhr.response;
+          var myBalance = parseInt(xhr.response)/100000000;
           loadBlockExplorerReceived(node,publicKey,myBalance);
         } else {
-          node.innerHTML = '<a href="https://blockexplorer.com/address/'+ publicKey +'" target="_blank">BlockExplorer</a> not available.';
+          node.innerHTML = ' <a href="https://blockexplorer.com/address/'+ publicKey +'" target="_blank">BlockExplorer</a> not available.';
           console.log('BlockExplorer not available. Error '+status+'.');
         }
       }
@@ -164,7 +164,7 @@
       if (xhr.readyState == 4) {
         var status = xhr.status;
         if (status == 200) {
-          var myReceived = xhr.response;
+          var myReceived = parseInt(xhr.response)/100000000;
           node.innerHTML = ' Balance: '+ myBalance + ' BTC. Received: '+ myReceived + ' BTC. <a href="https://blockexplorer.com/address/'+ publicKey +'" target="_blank">BlockExplorer</a>';
         } else {
           node.innerHTML = '<a href="https://blockexplorer.com/address/'+ publicKey +'" target="_blank">BlockExplorer</a> not available.';
