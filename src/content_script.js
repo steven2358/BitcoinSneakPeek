@@ -124,7 +124,7 @@
         }
       }
     }
-    var url = 'https://blockchain.info/rawaddr/'+publicKey+'?limit=0'
+    var url = 'https://blockchain.info/rawaddr/'+publicKey+'?limit=0&cors=true'
     node.innerHTML = ' Loading...';
     
     xhr.open("GET", url, true);
