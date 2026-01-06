@@ -205,7 +205,7 @@
 
       for (var i = 0, len = list.length; i < len; i++) {
         var img = document.createElement("img");
-        img.src = chrome.extension.getURL("i/bitcoinsneakpeak32.png");
+        img.src = chrome.runtime.getURL("i/bitcoinsneakpeek32.png");
         img.className = 'bitcoinBalanceIcon';
         img.setAttribute('title','Bitcoin Sneak Peek');
         img.setAttribute('alt',''); // avoid copying out extension text
@@ -270,7 +270,7 @@
   * From https://developer.mozilla.org/en-US/docs/Web/API/MutationObserver
   */
   function observeMutations(){
-    target = document.body;
+    var target = document.body;
 
     // create an observer instance
     var observer = new MutationObserver(function(mutations) {
