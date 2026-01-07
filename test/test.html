@@ -1,26 +1,98 @@
 <html>
+  <head>
+    <title>Bitcoin Sneak Peek - Test Page</title>
+    <style>
+      body { font-family: sans-serif; padding: 20px; }
+      h3 { margin-top: 30px; border-bottom: 1px solid #ccc; }
+      .test-case { margin: 10px 0; padding: 10px; background: #f5f5f5; }
+      .note { background: #fff3cd; border: 1px solid #ffc107; padding: 12px; margin-bottom: 20px; border-radius: 4px; }
+    </style>
+  </head>
   <body>
-    <!-- Should show Bitcoin addresses in all of the following scenarios -->
+    <h1>Bitcoin Sneak Peek Test Page</h1>
+
+    <div class="note">
+      <strong>Testing Tips:</strong>
+      <ul style="margin: 8px 0 0 0; padding-left: 20px;">
+        <li>Wait at least 3 seconds before clicking the same address again (rate limiting)</li>
+        <li>Test specific providers with modifier keys:
+          <ul style="margin: 4px 0; padding-left: 16px;">
+            <li><strong>Click</strong> → Blockchain.com (primary)</li>
+            <li><strong>Shift + Click</strong> → Mempool.space</li>
+            <li><strong>Ctrl + Click</strong> (or <strong>Cmd + Click</strong> on Mac) → Blockstream.info</li>
+            <li><strong>Alt + Shift + Click</strong> (or <strong>Option + Shift + Click</strong> on Mac) → BlockCypher</li>
+          </ul>
+        </li>
+        <li>Check the browser console (F12) for detailed logs</li>
+        <li>Check the service worker console (chrome://extensions → service worker) for API logs</li>
+      </ul>
+    </div>
+
+    <h3>Address Types</h3>
+
+    <div class="test-case">
+      <strong>P2PKH (Legacy, starts with 1):</strong><br>
+      1KLoepWkHVEMksdMCsu7nc5amfTvVb2qvk
+    </div>
+
+    <div class="test-case">
+      <strong>P2SH (Script Hash, starts with 3):</strong><br>
+      3BTBAQtwo7s4GfheYvFjrzxmg1FiagfVRY
+    </div>
+
+    <div class="test-case">
+      <strong>P2WPKH (Native SegWit, starts with bc1q):</strong><br>
+      bc1qar0srrr7xfkvy5l643lydnw9re59gtzzwf5mdq
+    </div>
+
+    <div class="test-case">
+      <strong>P2TR (Taproot, starts with bc1p):</strong><br>
+      bc1p5d7rjq7g6rdk2yhzks9smlaqtedr4dekq08ge8ztwac72sfr9rusxg3297
+    </div>
+
+    <h3>Dynamic Content Tests</h3>
+
     <script>
+      // Immediate JS injection
+      document.write('<div class="test-case"><strong>JS document.write:</strong><br>1KLoepWkHVEMksdMCsu7nc5amfTvVb2qvk</div>');
 
-      document.write("<h4>JS immediate injection in h4. Orange juice fund: 1KLoepWkHVEMksdMCsu7nc5amfTvVb2qvk</h4>");
-      document.write("JS immediate injection in raw text. Orange juice fund: 1KLoepWkHVEMksdMCsu7nc5amfTvVb2qvk<br>");
+      // appendChild
+      var div1 = document.createElement('div');
+      div1.className = 'test-case';
+      div1.innerHTML = '<strong>JS appendChild:</strong><br>';
+      div1.appendChild(document.createTextNode('1KLoepWkHVEMksdMCsu7nc5amfTvVb2qvk'));
+      document.body.appendChild(div1);
 
-      var appendChildElement = document.createTextNode("Appended child via JS. Orange juice fund: 1KLoepWkHVEMksdMCsu7nc5amfTvVb2qvk");
-      document.body.appendChild(appendChildElement);
-      
+      // Deferred injection (100ms delay)
       setTimeout(function() {
-    
-        var deferredElement = document.createElement('h3');
-        var deferredText = document.createTextNode("Delay for .1 second then append via JS. Orange juice fund: 1KLoepWkHVEMksdMCsu7nc5amfTvVb2qvk");
-        deferredElement.appendChild(deferredText);
-        document.body.appendChild(deferredElement);
-
+        var div2 = document.createElement('div');
+        div2.className = 'test-case';
+        div2.innerHTML = '<strong>JS setTimeout (100ms):</strong><br>';
+        div2.appendChild(document.createTextNode('bc1qw508d6qejxtdg4y5r3zarvary0c5xw7kv8f3t4'));
+        document.body.appendChild(div2);
       }, 100);
 
+      // Longer deferred injection (500ms delay)
+      setTimeout(function() {
+        var div3 = document.createElement('div');
+        div3.className = 'test-case';
+        div3.innerHTML = '<strong>JS setTimeout (500ms):</strong><br>';
+        div3.appendChild(document.createTextNode('3BTBAQtwo7s4GfheYvFjrzxmg1FiagfVRY'));
+        document.body.appendChild(div3);
+      }, 500);
     </script>
 
-    <h4>Basic HTML. Orange juice fund: 1KLoepWkHVEMksdMCsu7nc5amfTvVb2qvk</h4>
+    <h3>Link Tests</h3>
+
+    <div class="test-case">
+      <strong>Address inside a link:</strong><br>
+      <a href="https://example.com">1KLoepWkHVEMksdMCsu7nc5amfTvVb2qvk</a>
+    </div>
+
+    <div class="test-case">
+      <strong>Multiple addresses in one paragraph:</strong><br>
+      First: 1KLoepWkHVEMksdMCsu7nc5amfTvVb2qvk and second: 3BTBAQtwo7s4GfheYvFjrzxmg1FiagfVRY
+    </div>
 
   </body>
 </html>
